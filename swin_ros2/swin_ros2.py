@@ -1,6 +1,6 @@
 import numpy
 import os
-from transformers import AutoFeatureExtractor
+from transformers import AutoFeatureExtractor, SwinForImageClassification
 import torch
 from PIL import Image as PilImage
 import rclpy
@@ -12,13 +12,12 @@ from cv_bridge import CvBridge
 ALGO_VERSION = os.getenv("MODEL_NAME")
 
 if not ALGO_VERSION:
-    ALGO_VERSION = '<default here>'
+    ALGO_VERSION = 'swin-tiny-patch4-window7-224'
 
 
 def predict(image: Image):
     feature_extractor = AutoFeatureExtractor.from_pretrained(ALGO_VERSION)
-    # model = <name>ForImageClassification.from_pretrained(ALGO_VERSION)
-    # Enter line here
+    model = SwinForImageClassification.from_pretrained(ALGO_VERSION)
 
     inputs = feature_extractor(image, return_tensors="pt")
 
@@ -36,14 +35,14 @@ class RosIO(Node):
         super().__init__('minimal_subscriber')
         self.image_subscription = self.create_subscription(
             Image,
-            '/<name>/sub/image_raw',
+            '/swin/sub/image_raw',
             self.listener_callback,
             10
         )
 
         self.result_publisher = self.create_publisher(
             String,
-            '/<name>/pub/result',
+            '/swin/pub/result',
             1
         )
 
@@ -65,7 +64,7 @@ class RosIO(Node):
 
 
 def main(args=None):
-    print('<name> Started')
+    print('swin Started')
 
     rclpy.init(args=args)
 
