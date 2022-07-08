@@ -12,7 +12,7 @@ from cv_bridge import CvBridge
 ALGO_VERSION = os.getenv("MODEL_NAME")
 
 if not ALGO_VERSION:
-    ALGO_VERSION = 'swin-tiny-patch4-window7-224'
+    ALGO_VERSION = 'microsoft/swin-tiny-patch4-window7-224'
 
 
 def predict(image: Image):
