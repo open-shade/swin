@@ -1,14 +1,17 @@
 declare -a ROS_VERSIONS=( "foxy" "galactic" "humble" "rolling" )
 
 ORGANIZATION="microsoft"
-declare -a MODEL_VERSIONS=( "swin-tiny-patch4-window7-224" "swin-base-patch4-window7-224" "swin-large-patch4-window7-224" "swin-small-patch4-window7-224" "swin-base-patch4-window12-384" "swin-large-patch4-window7-224")
+MODEL_NAME="swin"
+declare -a MODEL_VERSIONS=( "tiny-patch4-window7-224" "base-patch4-window7-224" "large-patch4-window7-224" "small-patch4-window7-224" "base-patch4-window12-384" "large-patch4-window7-224")
 
 for VERSION in "${ROS_VERSIONS[@]}"
 do
   for MODEL_VERSION in "${MODEL_VERSIONS[@]}"
   do
     ROS_VERSION="$VERSION"
-    gcloud builds submit --config cloudbuild.yaml . --substitutions=_ROS_VERSION="$ROS_VERSION",_MODEL_VERSION="$MODEL_VERSION",_ORGANIZATION="$ORGANIZATION" --timeout=10000 &
+    HF_VERSION="$MODEL_NAME-$MODEL_VERSION"
+    TAG="$MODEL_VERSION"
+    gcloud builds submit --config cloudbuild.yaml . --substitutions=_ROS_VERSION="$ROS_VERSION",_TAG="$TAG",_MODEL_VERSION="$HF_VERSION",_ORGANIZATION="$ORGANIZATION" --timeout=10000 &
     pids+=($!)
     echo Dispatched "$MODEL_VERSION" on ROS "$ROS_VERSION"
   done
