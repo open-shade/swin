@@ -22,12 +22,12 @@ RUN apt update && \
     echo "source /opt/shade/setup.sh" >> /home/shade/shade_ws/start.sh && \
     echo "source /opt/ros/${ROS_VERSION}/setup.sh" >> /home/shade/shade_ws/start.sh && \
     echo "source ./install/setup.sh" >> ./start.sh && \
-    echo "ros2 run swin_ros2 swin_ros2" >> /home/shade/shade_ws/start.sh && \
+    echo "ros2 run swin swin" >> /home/shade/shade_ws/start.sh && \
     chmod +x ./start.sh
 
-COPY . ./src/swin_ros2
+COPY . ./src/swin
 
-RUN pip3 install ./src/swin_ros2 && \
+RUN pip3 install ./src/swin && \
     : "Install the model" && \
     python3 -c "from transformers import AutoFeatureExtractor; AutoFeatureExtractor.from_pretrained('${MODEL_NAME}')" && \
     colcon build
