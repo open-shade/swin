@@ -35,14 +35,14 @@ class RosIO(Node):
         super().__init__('minimal_subscriber')
         self.image_subscription = self.create_subscription(
             Image,
-            '/swin/sub/image_raw',
+            '/swin/image_raw',
             self.listener_callback,
             10
         )
 
         self.result_publisher = self.create_publisher(
             String,
-            '/swin/pub/result',
+            '/swin/result',
             1
         )
 
@@ -64,7 +64,7 @@ class RosIO(Node):
 
 
 def main(args=None):
-    print('swin Started')
+    print('SWIN Started')
 
     rclpy.init(args=args)
 
