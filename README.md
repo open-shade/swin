@@ -13,7 +13,7 @@ SWIN Transformers builds on top of vision transformers by addressing the differe
 
 ## Build Docker Image Natively
 1. Install [Docker](https://www.docker.com/) and ensure the Docker daemon is running in the background.
-2. Clone this repo with ```git pull -b ${ROS2_DISTRO} https://github.com/open-shade/swin.git```
+2. Clone this repo with ```git pull https://github.com/open-shade/swin.git```
 3. Enter the repo with ```cd swin```
 4. To pick a specific model version, edit the `ALGO_VERSION` constant in `/swin/swin.py`
 5. Build the container with ```docker build . -t [name]```. This will take a while. We have also provided associated `cloudbuild.sh` scripts to build on GCP all of the associated versions.
