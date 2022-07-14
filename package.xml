@@ -3,9 +3,10 @@
 <package format="3">
   <name>swin</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="lidar@todo.todo">lidar</maintainer>
-  <license>TODO: License declaration</license>
+  <description>SWIN Transformers builds on top of vision transformers by addressing the differences between NLP and vision, 
+  the paper proposes a hierarchical Transformer whose representation is computed with Shifted Windows. We add an image classification head on top.</description>
+  <maintainer email="support@shaderobotics.com">Shade Robotics</maintainer>
+  <license>apache-2.0</license>
 
   <test_depend>ament_copyright</test_depend>
   <test_depend>ament_flake8</test_depend>
